@@ -15,7 +15,7 @@ const AudioRecorderDemo: React.FC = () => {
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
-    /*
+    /*  May be needed in the future for cleanup
     useEffect(() => {
         return () => {
             if (recording) {
@@ -56,26 +56,27 @@ const AudioRecorderDemo: React.FC = () => {
                 {
                     android: {
                         extension: '.wav',
-                        outputFormat: 2, // Corresponds to MPEG_4
-                        audioEncoder: 3, // Corresponds to AAC
-                        sampleRate: 48000,
-                        numberOfChannels: 2,
-                        bitRate: 128000,
+                        outputFormat: 0,
+                        audioEncoder: 0,
+                        sampleRate: 48000, // High-quality sample rate
+                        numberOfChannels: 2, // Stereo
+                        bitRate: 128000, // Higher bit rate for uncompressed audio
                     },
                     ios: {
                         extension: '.wav',
                         audioQuality: 127, // Corresponds to MAX
+                        outputFormat: "lpcm",
                         bitDepthHint: 32,
                         sampleRate: 48000,
                         numberOfChannels: 2,
-                        bitRate: 256000,
+                        bitRate: 128000,
                         bitRateStrategy: 0, // Corresponds to CONSTANT
                         linearPCMBitDepth: 32,
                         linearPCMIsBigEndian: false,
                         linearPCMIsFloat: false,
                     },
                     web: {
-                        mimeType: 'audio/webm',
+                        mimeType: 'audio/wav',
                         bitsPerSecond: 128000,
                     },
                 }
